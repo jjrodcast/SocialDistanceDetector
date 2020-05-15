@@ -91,19 +91,22 @@ def get_domain_boxes(classes, class_ids, nms_indices, boxes, domain_class):
 def people_distances_bird_eye_view(boxes, distance_allowed):
     people_bad_distances = []
     people_good_distances = []
-    
-    for i in range(0, len(boxes)-1):
-        for j in range(i+1, len(boxes)):
-            _,_,_,_,cxi,cyi = boxes[i]
-            _,_,_,_,cxj,cyj = boxes[j]
-            points = [[cxi,cyi],[cxj,cyj]]
-            result = __map_points_to_bird_eye_view(points)
-            distance = eucledian_distance(result[0][0], result[0][1])
-            if distance < distance_allowed:
-                people_bad_distances.append(boxes[i])
-                people_bad_distances.append(boxes[j])
+    # Tomamos los valores center,bottom
+    result = __map_points_to_bird_eye_view([[box[4],box[1]+box[3]] for box in boxes])[0]
+    # Creamos nuevos bounding boxes con valores mapeados de bird eye view (8 elementos por item)
+    # left, top, width, height, cx, cy, bev_cy, bev_cy
+    new_boxes = [box + tuple(result) for box, result in zip(boxes, result)]
 
-    people_good_distances = list(set(boxes) - set(people_bad_distances))
+    for i in range(0, len(new_boxes)-1):
+        for j in range(i+1, len(new_boxes)):
+            cxi,cyi = new_boxes[i][6:]
+            cxj,cyj = new_boxes[j][6:]
+            distance = eucledian_distance([cxi,cyi], [cxj,cyj])
+            if distance < distance_allowed:
+                people_bad_distances.append(new_boxes[i])
+                people_bad_distances.append(new_boxes[j])
+
+    people_good_distances = list(set(new_boxes) - set(people_bad_distances))
     people_bad_distances = list(set(people_bad_distances))
     
     return (people_good_distances, people_bad_distances)
@@ -114,21 +117,19 @@ def draw_new_image_with_boxes(image, people_good_distances, people_bad_distances
     new_image = image.copy()
     
     for person in people_bad_distances:
-        left, top, width, height, cx, cy = person
+        left, top, width, height = person[:4]
         cv2.rectangle(new_image, (left, top), (left + width, top + height), red, 2)
     
     for person in people_good_distances:
-        left, top, width, height, cx, cy = person
+        left, top, width, height = person[:4]
         cv2.rectangle(new_image, (left, top), (left + width, top + height), green, 2)
     
     if draw_lines:
         for i in range(0, len(people_bad_distances)-1):
             for j in range(i+1, len(people_bad_distances)):
-                _,_,_,_,cxi,cyi = people_bad_distances[i]
-                _,_,_,_,cxj,cyj = people_bad_distances[j]                
-                points = [[cxi,cyi],[cxj,cyj]]
-                result = __map_points_to_bird_eye_view(points)
-                distance = eucledian_distance(result[0][0], result[0][1])
+                cxi,cyi,bevxi,bevyi = people_bad_distances[i][4:]
+                cxj,cyj,bevxj,bevyj = people_bad_distances[j][4:]
+                distance = eucledian_distance([bevxi, bevyi], [bevxj, bevyj])
                 if distance < distance_allowed:
                     cv2.line(new_image, (cxi, cyi), (cxj, cyj), red, 2)
             
