@@ -7,11 +7,11 @@ def create_model(config, weights, use_gpu=False):
     backend = None
     target = None
     if use_gpu:
-        backend = cv2.dnn.DNN_BACKEND_OPENCV
-        target = cv2.dnn.DNN_TARGET_CPU
-    else:
         backend = cv2.dnn.DNN_BACKEND_CUDA
         target = cv2.dnn.DNN_TARGET_CUDA
+    else:
+        backend = cv2.dnn.DNN_BACKEND_OPENCV
+        target = cv2.dnn.DNN_TARGET_CPU
     
     model.setPreferableBackend(backend)
     model.setPreferableTarget(target)
