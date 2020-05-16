@@ -3,15 +3,22 @@ import cv2
 from math import sqrt
 
 def create_model(config, weights, use_gpu=False):
+    """
+    Esta función se encarga de crear el modelo que detecta
+    las personas en una imagen. Para esto se hace uso de 
+    YOLOv3.
+
+    Parámetros:
+        config: Archivo de configuración de la red YOLOv3
+        weights: Archivo de pesos de la red YOLOv3
+    
+    Salida:
+        Retorna el modelo de YOLOv3
+            
+    """
     model = cv2.dnn.readNetFromDarknet(config, weights)
-    backend = None
-    target = None
-    if use_gpu:
-        backend = cv2.dnn.DNN_BACKEND_CUDA
-        target = cv2.dnn.DNN_TARGET_CUDA
-    else:
-        backend = cv2.dnn.DNN_BACKEND_OPENCV
-        target = cv2.dnn.DNN_TARGET_CPU
+    backend = cv2.dnn.DNN_BACKEND_OPENCV
+    target = cv2.dnn.DNN_TARGET_CPU
     
     model.setPreferableBackend(backend)
     model.setPreferableTarget(target)
@@ -19,6 +26,16 @@ def create_model(config, weights, use_gpu=False):
     return model
 
 def get_output_layers(model):
+    """
+    Esta función obtiene las capas de salida de la red para poder realizar la 
+    predicción en YOLOv3
+
+    Parámetros:
+        model: Modelo creado de YOLOv3, usar función create_model
+
+    Salida:
+        Retorna las capas de salida para la predicción
+    """
     layer_names = model.getLayerNames()
     output_layers = [layer_names[i[0]-1] for i in model.getUnconnectedOutLayers()]
     return output_layers
