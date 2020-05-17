@@ -10,7 +10,11 @@ Este proyecto contiene una implementación para detectar en una imagen o en un v
     <img src='results/Res4.png' alt="Resultado">
 </p>
 
-Video: https://www.youtube.com/watch?v=XxR2PXG9Zgk
+
+Más Imágenes [aquí](results/).
+
+También puedes ver el video resultante en el siguiente link: https://www.youtube.com/watch?v=XxR2PXG9Zgk
+
 
 ## Procedimiento 🛠️
 
