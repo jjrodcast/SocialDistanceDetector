@@ -7,7 +7,7 @@ Proyecto Final de fin de curso de *_Desarrollo de Aplicaciones con Visión Artif
 Este proyecto contiene una implementación para detectar en una imagen o en un video las personas que cumplen o no el distanciamiento social necesario que les ayudes a prevenir contagiarse del COVID-19.
 
 <p align="center"> 
-    <img src= IMAGEN_CAMBIAR alt="Resultado">
+    <img src='results/Res4.png' alt="Resultado">
 </p>
 
 ## Procedimiento 🛠️
