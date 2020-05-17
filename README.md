@@ -4,7 +4,7 @@ Proyecto Final de fin de curso de *_Desarrollo de Aplicaciones con Visión Artif
 
 ## Objetivo 🚀
 
-Este proyecto contiene una implementación para detectar en una imagen o en un video las personas que cumplen o no el distanciamiento social necesario que les ayudes a prevenir contagiarse del COVID-19.
+Este proyecto contiene una implementación para detectar en una imagen o en un video las personas que cumplen o no el distanciamiento social necesario que ayude a reducir el incremento de contagios por COVID-19.
 
 <p align="center"> 
     <img src='results/Res4.png' alt="Resultado">
@@ -77,9 +77,11 @@ Colab ya trae instaladas muchas de las librerías utilizadas en este proyecto, s
 
 ## Documentación de apoyo 📚
 
-Object Detection Algorithms: https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e
+- Object Detection Algorithms: https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e
 
-Landing AI Creates an AI Tool to Help Customers Monitor Social Distancing in the Workplace: https://landing.ai/landing-ai-creates-an-ai-tool-to-help-customers-monitor-social-distancing-in-the-workplace/
+- Landing AI Creates an AI Tool to Help Customers Monitor Social Distancing in the Workplace: https://landing.ai/landing-ai-creates-an-ai-tool-to-help-customers-monitor-social-distancing-in-the-workplace/
+
+- YOLO: Real-Time Object Detection: https://pjreddie.com/darknet/yolo/
 
 
 ## Autores ✒️
