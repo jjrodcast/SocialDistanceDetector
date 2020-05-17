@@ -1,4 +1,4 @@
-# SocialDistanceDetector
+# Social Distance Detector
 
 Proyecto Final de fin de curso de *_Desarrollo de Aplicaciones con Visión Artificial_* del Diplomado de Inteligencia Artificial de la PUCP.
 
@@ -10,46 +10,56 @@ Este proyecto contiene una implementación para detectar en una imagen o en un v
     <img src='results/Res4.png' alt="Resultado">
 </p>
 
+Video: https://www.youtube.com/watch?v=XxR2PXG9Zgk
+
 ## Procedimiento 🛠️
 
-El proceso general para detectar el distanciamiento social es el siguiente:
+El proceso general para detectar el cumplimiento del distanciamiento social es el siguiente:
 
-1. **Leer** la imagen o frame de video.
-2. **Aplicar modelo XYZ** para detectar ABC.
-3. **Aplicar modelo XYZ** para ABC.
-4. **Repetir el proceso** para todos los rostros en la imagen.
+1. **Leer** un frame del video.
+2. **Aplicar modelo CNN-Yolov3** para detectar los bounding box de las personas.
+3. **Obtener los puntos de interés (puntos centro-inferior)** a partir de los bounding boxes generados.
+4. **Mapear los puntos de interés hacia la vista Bird's Eye** utilizando la matriz de transformación de perpectiva pre-calculada. Se considera estos puntos puestos que son los que nos brindan la referencia de la ubicación de las personas desde una perspectiva top-down.
+5. **Calcular todas las distancias entre los puntos transformados** para determinar en base a un threshold definido las personas que cumplen una distancia mínima requerida o no. 
+6. **Mostrar los resultados**, se colorean de ROJO los que NO CUMPLEN, y en su defecto de VERDE a los que SÍ CUMPLEN.
+7. **Repetir el proceso** para todos los frames en el video.
 
 
 ## Pre-Requisitos 📋
 
-(Actualizar)
 Este proyecto inicialmente ha sido diseñado para poder ser ejecutado en Colab y para una optimización se activó el entorno de ejecución en GPU.
-Colab ya trae instaladas muchas de las librerías utilizadas en este proyecto, solo fue necesario instalar adicionalmente:
-- mtcnn (Detector de rostros: Multi-Task Cascaded Convolutional Neural Network)
+Colab ya trae instaladas muchas de las librerías utilizadas en este proyecto, solo fue necesario descargar:
+- yolov3.cfg 
+- coco.names 
+- yolov3.weights 
 
 ```
-!pip install actualizar ---------------
+!wget "https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg"
+!wget "https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names"
+!wget "https://pjreddie.com/media/files/yolov3.weights"
 ```
 
 ## Archivos necesarios para la ejecución 🛠️
 
-(Falta actualizar descripciones)
-
 📌 **MODELOS:**
 
-* **_models/yolov3-320_** : Model CNN entrenado desde cero con Keras.
+* **_models/yolov3-608_** : Carpeta con los archivos necesarios para levantar el modelo CNN-YOLO y realizar la detección de personas.
 
-* **_models/yolov3-608_** : Modelo CNN pre-entrenado de ResNet18 en Pytorch, del cual se mantuvo la estructura de la red y se volvieron a entrenar los pesos en todas las capas.
+   - _yolov3.cfg_ : Configuración del Modelo de CNN-YOLO para la detección de objetos
+   
+   - _coco.names_ : Clases de objetos que detecta la red neuronal
+   
+   - _yolov3.weights_ : Pesos de la red neuronal
 
 📌 **UTILITARIOS:**
 
-* **_utils/functions.py_** : Utilitario para incrementar en un porcentaje dato el cuadro delimitador de un rostro en una imagen.
+* **_utils/functions.py_** : Utilitario con las funciones utilizadas durante todo el proceso central.
 
-* **_utils/view.py_** : Utilitario para detectar las caras en las imágenes o frames de videos.
+* **_utils/view.py_** : Utilitario con las funciones gráficas utilizadas para la generación de las vistas.
 
 📌 **ARCHIVO PRINCIPAL:**
 
-* **_Social Distance Detector v3.ipynb_** : Notebook con las pruebas end-to-end para generar sobre imágenes y videos las predicciones de si una persona está usando o no una mascarilla.
+* **_Social Distance Detector.ipynb_** : Notebook con el desarollo y las pruebas end-to-end para detectar el cumplimiento del distanciamiento social
 
 📌 **ARCHIVOS MULTIMEDIA:**
 
@@ -66,6 +76,8 @@ Colab ya trae instaladas muchas de las librerías utilizadas en este proyecto, s
 * Ejecutar todo el notebook
 
 ## Documentación de apoyo 📚
+
+Object Detection Algorithms: https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e
 
 Landing AI Creates an AI Tool to Help Customers Monitor Social Distancing in the Workplace: https://landing.ai/landing-ai-creates-an-ai-tool-to-help-customers-monitor-social-distancing-in-the-workplace/
 
