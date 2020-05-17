@@ -11,7 +11,7 @@ Este proyecto contiene una implementación para detectar en una imagen o en un v
 </p>
 
 
-Más Imágenes [aquí](results/).
+Más Resultados [aquí](results/).
 
 También puedes ver el video resultante en el siguiente link: https://www.youtube.com/watch?v=XxR2PXG9Zgk
 
@@ -47,7 +47,7 @@ Colab ya trae instaladas muchas de las librerías utilizadas en este proyecto, s
 
 📌 **MODELOS:**
 
-* **_models/yolov3-608_** : Carpeta con los archivos necesarios para levantar el modelo CNN-YOLO y realizar la detección de personas.
+* **_models/** : Carpeta con los archivos necesarios para levantar el modelo CNN-YOLO y realizar la detección de personas.
 
    - _yolov3.cfg_ : Configuración del Modelo de CNN-YOLO para la detección de objetos
    
