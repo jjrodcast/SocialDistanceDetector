@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from math import sqrt
 
-def create_model(config, weights, use_gpu=False):
+def create_model(config, weights):
     """
     Esta función se encarga de crear el modelo que detecta
     las personas en una imagen. Para esto se hace uso de 
@@ -43,7 +43,7 @@ def get_output_layers(model):
 def blob_from_image(image, target_size):
     """
     Esta función se encarga de crear un blob sobre la imagen o frame de video
-    que se quiera predecir, se hace escalamiento [0-255] y de dimensión (416 x 416)
+    que se quiera predecir, se hace escalamiento [0-255] y se redimensiona
     ya que así lo requiere el modelo de YOLOv3
 
     Parámetros:
