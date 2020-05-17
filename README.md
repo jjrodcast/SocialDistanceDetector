@@ -37,6 +37,8 @@ Colab ya trae instaladas muchas de las librerías utilizadas en este proyecto, s
 - coco.names 
 - yolov3.weights 
 
+Nota: La descarga de estos archivos en la siguiente ruta son opcionales. También se encuentran en la carpeta "models/" de este repositorio.
+
 ```
 !wget "https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg"
 !wget "https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names"
